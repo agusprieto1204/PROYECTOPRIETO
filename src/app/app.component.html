@@ -1,0 +1,47 @@
+<div class="container">
+  <h1 class="title">Techno Ticket Hub</h1>
+  <div class="ticket-listing">
+    <h2>Immerse Yourself in the Pulse of Techno</h2>
+  </div>
+
+  <div class="subtitulo">
+    <button class="btn">Inicio</button>
+    <button class="btn">Boletería</button>
+    <button class="btn">Artistas</button>
+    <button class="btn">Carrito</button>
+  </div>
+
+  <div class="formulario">
+    <h3>Compra de Tickets</h3>
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" formControlName="nombre">
+      </div>
+      <div class="form-group">
+        <label for="cantidad">Cantidad de tickets a comprar:</label>
+        <input type="number" id="cantidad" name="cantidad" min="1" formControlName="cantidad">
+      </div>
+      <div class="form-group">
+        <label for="mail">Correo electrónico:</label>
+        <input type="email" id="mail" name="mail" formControlName="mail">
+      </div>
+      <div class="form-group">
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono" formControlName="telefono">
+      </div>
+      <button type="submit" class="btn-submit">Enviar</button>
+    </form>
+  </div>
+
+  <h3>Listado de Clientes</h3>
+  <div class="ticket-wrapper">
+    <input type="text" placeholder="Buscar..." [(ngModel)]="searchText">
+    <div class="ticket" *ngFor="let cliente of clientes | filter: searchText">
+      <img src="{{ cliente.image }}" alt="Cliente">
+      <div class="ticket-details">
+        <p>{{ cliente.nombre }}</p>
+      </div>
+    </div>
+  </div>
+</div>

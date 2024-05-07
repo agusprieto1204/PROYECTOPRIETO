@@ -1,0 +1,50 @@
+<div class="container">
+    <h2>ABM de Clientes</h2>
+      <div class="form-container">
+      <h3>Formulario</h3>
+      <form (ngSubmit)="agregarOActualizarCliente()" #clienteForm="ngForm">
+        <div class="form-group">
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" name="nombre" [(ngModel)]="cliente.nombre" required>
+          <div *ngIf="clienteForm.controls['nombre'].invalid && (clienteForm.controls['nombre'].dirty || clienteForm.controls['nombre'].touched)">
+            <small *ngIf="clienteForm.controls['nombre'].errors?.required">Nombre es requerido</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="apellido">Apellido:</label>
+          <input type="text" id="apellido" name="apellido" [(ngModel)]="cliente.apellido" required>
+          <div *ngIf="clienteForm.controls['apellido'].invalid && (clienteForm.controls['apellido'].dirty || clienteForm.controls['apellido'].touched)">
+            <small *ngIf="clienteForm.controls['apellido'].errors?.required">Apellido es requerido</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="correo">Correo electrónico:</label>
+          <input type="email" id="correo" name="correo" [(ngModel)]="cliente.correo" required>
+          <div *ngIf="clienteForm.controls['correo'].invalid && (clienteForm.controls['correo'].dirty || clienteForm.controls['correo'].touched)">
+            <small *ngIf="clienteForm.controls['correo'].errors?.required">Correo es requerido</small>
+            <small *ngIf="clienteForm.controls['correo'].errors?.email">Correo no es válido</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="telefono">Teléfono:</label>
+          <input type="tel" id="telefono" name="telefono" [(ngModel)]="cliente.telefono">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn-submit">Agregar/Actualizar Cliente</button>
+        </div>
+      </form>
+      <div *ngIf="mensaje" class="mensaje">
+        {{ mensaje }}
+      </div>
+      <div appFontSize="24px"></div>
+      <div class="list-container">
+      <h3>Lista de Clientes</h3>
+      <ul>
+        <li *ngFor="let cliente of clientes">
+          {{ cliente.nombre }} {{ cliente.apellido }}
+          <button (click)="eliminarCliente(cliente.id)">Eliminar</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
